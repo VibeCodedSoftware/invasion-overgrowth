@@ -1,0 +1,1 @@
+{ "feature": "invasion:flesh_nest", "placement": [ { "type": "minecraft:rarity_filter", "chance": 28 }, { "type": "minecraft:biome" } ] }

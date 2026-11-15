@@ -1,0 +1,8 @@
+{
+  "type": "invasion:giant_tree",
+  "config": {
+    "log": { "Name": "minecraft:birch_log", "Properties": { "axis": "y" } },
+    "leaves": { "Name": "minecraft:birch_leaves", "Properties": { "distance": "7", "persistent": "true", "waterlogged": "false" } },
+    "accent_leaves": { "Name": "minecraft:birch_leaves", "Properties": { "distance": "7", "persistent": "true", "waterlogged": "false" } }
+  }
+}

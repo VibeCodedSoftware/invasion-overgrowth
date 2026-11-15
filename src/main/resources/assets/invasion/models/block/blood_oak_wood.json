@@ -1,0 +1,1 @@
+{ "parent": "minecraft:block/cube_column", "textures": { "side": "invasion:block/blood_oak_log", "end": "invasion:block/blood_oak_log" } }

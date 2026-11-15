@@ -1,0 +1,5 @@
+{ "variants": {
+  "axis=y": { "model": "invasion:block/stripped_blood_oak_wood" },
+  "axis=z": { "model": "invasion:block/stripped_blood_oak_wood_horizontal", "x": 90 },
+  "axis=x": { "model": "invasion:block/stripped_blood_oak_wood_horizontal", "x": 90, "y": 90 }
+} }

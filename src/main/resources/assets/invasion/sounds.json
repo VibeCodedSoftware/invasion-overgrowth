@@ -1,0 +1,7 @@
+{
+  "glove_fire":     { "subtitle": "subtitles.invasion.glove_fire",     "sounds": [ { "name": "minecraft:entity.blaze.shoot", "type": "event" } ] },
+  "glove_redstone": { "subtitle": "subtitles.invasion.glove_redstone", "sounds": [ { "name": "minecraft:entity.firework_rocket.blast", "type": "event" } ] },
+  "glove_water":    { "subtitle": "subtitles.invasion.glove_water",    "sounds": [ { "name": "minecraft:item.bucket.empty", "type": "event" } ] },
+  "glove_charge":   { "subtitle": "subtitles.invasion.glove_charge",   "sounds": [ { "name": "minecraft:block.respawn_anchor.charge", "type": "event" } ] },
+  "shockwave":      { "subtitle": "subtitles.invasion.shockwave",      "sounds": [ { "name": "minecraft:item.mace.smash_ground_heavy", "type": "event" } ] }
+}

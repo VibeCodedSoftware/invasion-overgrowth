@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "axis=x,core=false": { "model": "invasion:block/invasion_portal_ns" },
+    "axis=x,core=true": { "model": "invasion:block/invasion_portal_ns" },
+    "axis=z,core=false": { "model": "invasion:block/invasion_portal_ew" },
+    "axis=z,core=true": { "model": "invasion:block/invasion_portal_ew" }
+  }
+}

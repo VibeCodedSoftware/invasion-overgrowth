@@ -1,0 +1,1 @@
+{ "parent": "minecraft:item/generated", "textures": { "layer0": "invasion:item/flesh_thing_spawn_egg" } }

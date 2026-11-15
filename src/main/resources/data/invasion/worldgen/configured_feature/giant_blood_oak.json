@@ -1,0 +1,8 @@
+{
+  "type": "invasion:giant_tree",
+  "config": {
+    "log": { "Name": "invasion:blood_oak_log", "Properties": { "axis": "y" } },
+    "leaves": { "Name": "invasion:blood_oak_leaves", "Properties": { "distance": "7", "persistent": "true", "waterlogged": "false" } },
+    "accent_leaves": { "Name": "invasion:blood_oak_leaves", "Properties": { "distance": "7", "persistent": "true", "waterlogged": "false" } }
+  }
+}

@@ -1,0 +1,1 @@
+{ "type": "minecraft:crafting_shapeless", "category": "transportation", "ingredients": [ { "item": "minecraft:chest" }, { "item": "invasion:blood_oak_boat" } ], "result": { "count": 1, "id": "invasion:blood_oak_chest_boat" } }

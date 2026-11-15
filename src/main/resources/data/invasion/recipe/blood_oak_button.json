@@ -1,0 +1,1 @@
+{ "type": "minecraft:crafting_shapeless", "category": "redstone", "ingredients": [ { "item": "invasion:blood_oak_planks" } ], "result": { "count": 1, "id": "invasion:blood_oak_button" } }

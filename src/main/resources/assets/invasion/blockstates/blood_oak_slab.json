@@ -1,0 +1,5 @@
+{ "variants": {
+  "type=bottom": { "model": "invasion:block/blood_oak_slab" },
+  "type=top": { "model": "invasion:block/blood_oak_slab_top" },
+  "type=double": { "model": "invasion:block/blood_oak_planks" }
+} }

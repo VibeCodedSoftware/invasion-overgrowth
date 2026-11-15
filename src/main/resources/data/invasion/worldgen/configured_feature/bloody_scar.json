@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:vegetation_patch",
+  "config": {
+    "depth": 2, "extra_bottom_block_chance": 0.4, "extra_edge_column_chance": 0.5,
+    "ground_state": { "type": "minecraft:weighted_state_provider", "entries": [
+      { "data": { "Name": "invasion:bloody_cobblestone" }, "weight": 4 },
+      { "data": { "Name": "minecraft:coarse_dirt" }, "weight": 3 },
+      { "data": { "Name": "minecraft:mossy_cobblestone" }, "weight": 1 },
+      { "data": { "Name": "minecraft:magma_block" }, "weight": 1 } ] },
+    "replaceable": "#minecraft:moss_replaceable", "surface": "floor", "vegetation_chance": 0.08,
+    "vegetation_feature": { "feature": "minecraft:patch_dead_bush", "placement": [] },
+    "vertical_range": 5, "xz_radius": { "type": "minecraft:uniform", "min_inclusive": 3, "max_inclusive": 7 }
+  }
+}

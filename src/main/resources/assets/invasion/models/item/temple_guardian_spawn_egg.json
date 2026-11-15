@@ -1,0 +1,4 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": { "layer0": "invasion:item/temple_guardian_spawn_egg" }
+}

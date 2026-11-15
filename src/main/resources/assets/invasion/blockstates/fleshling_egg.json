@@ -1,0 +1,1 @@
+{ "variants": { "hatch=0": { "model": "invasion:block/fleshling_egg" }, "hatch=1": { "model": "invasion:block/fleshling_egg" }, "hatch=2": { "model": "invasion:block/fleshling_egg" } } }

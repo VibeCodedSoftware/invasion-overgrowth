@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "stage=0": { "model": "invasion:block/giant_azalea_sapling" },
+    "stage=1": { "model": "invasion:block/giant_azalea_sapling" }
+  }
+}

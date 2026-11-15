@@ -1,0 +1,16 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "invasion:block/bloody_cobblestone",
+    "stone": "invasion:block/bloody_cobblestone",
+    "blood": "minecraft:block/water_still"
+  },
+  "elements": [
+    { "from": [0, 0, 0], "to": [16, 16, 16], "faces": {
+      "down": { "texture": "#stone", "cullface": "down" }, "up": { "texture": "#stone", "cullface": "up" },
+      "north": { "texture": "#stone", "cullface": "north" }, "south": { "texture": "#stone", "cullface": "south" },
+      "west": { "texture": "#stone", "cullface": "west" }, "east": { "texture": "#stone", "cullface": "east" } } },
+    { "from": [3, 16.01, 3], "to": [13, 16.02, 13], "shade": false, "faces": {
+      "up": { "uv": [3, 3, 13, 13], "texture": "#blood", "tintindex": 0 } } }
+  ]
+}

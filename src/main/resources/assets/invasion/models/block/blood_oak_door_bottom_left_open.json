@@ -1,0 +1,1 @@
+{ "parent": "minecraft:block/door_bottom_left_open", "render_type": "minecraft:cutout", "textures": { "top": "invasion:block/blood_oak_door_top", "bottom": "invasion:block/blood_oak_door_bottom" } }

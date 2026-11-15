@@ -1,0 +1,1 @@
+{ "type": "minecraft:crafting_shaped", "category": "redstone", "key": { "#": { "item": "invasion:blood_oak_planks" } }, "pattern": [ "###", "###" ], "result": { "count": 2, "id": "invasion:blood_oak_trapdoor" } }

@@ -1,0 +1,32 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "All Rights Reserved"
+
+[[mods]]
+modId = "invasion"
+version = "1.0.0"
+displayName = "Invasion: Overgrowth"
+enumExtensions = "META-INF/enumextensions.json"
+authors = "VibeCodedSoftware"
+description = '''
+After three days a blood-red meteor tears across the sky and opens a portal. A never-ending horde of
+sword-swinging, tunnelling invaders pours out and hunts you down wherever you are. Cross into the Overgrowth -
+mossy wilds, giant tree lands with Ent villages, the Flesh, Dark Flesh, Blood Grove and Bloodstone Wastes -
+climb to the temple and defeat its Guardian to claim the Particle Gauntlet and end the invasion.
+
+A spiritual successor to Hostile Worlds: Invasion by Corosus.
+'''
+
+[[dependencies.invasion]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.invasion]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.22)"
+ordering = "NONE"
+side = "BOTH"

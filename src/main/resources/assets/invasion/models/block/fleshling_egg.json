@@ -1,0 +1,5 @@
+{ "parent": "minecraft:block/block", "textures": { "particle": "invasion:block/spotted_flesh", "t": "invasion:block/spotted_flesh" },
+  "elements": [ { "from": [5, 0, 5], "to": [11, 9, 11], "faces": {
+    "north": { "uv": [5, 4, 11, 13], "texture": "#t" }, "south": { "uv": [5, 4, 11, 13], "texture": "#t" }, "east": { "uv": [5, 4, 11, 13], "texture": "#t" }, "west": { "uv": [5, 4, 11, 13], "texture": "#t" },
+    "up": { "uv": [5, 5, 11, 11], "texture": "#t" }, "down": { "uv": [5, 5, 11, 11], "texture": "#t" } } },
+    { "from": [6, 9, 6], "to": [10, 10, 10], "faces": { "north": { "uv": [6, 3, 10, 4], "texture": "#t" }, "south": { "uv": [6, 3, 10, 4], "texture": "#t" }, "east": { "uv": [6, 3, 10, 4], "texture": "#t" }, "west": { "uv": [6, 3, 10, 4], "texture": "#t" }, "up": { "uv": [6, 6, 10, 10], "texture": "#t" } } } ] }

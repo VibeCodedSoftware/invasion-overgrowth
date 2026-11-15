@@ -1,0 +1,8 @@
+{
+  "type": "invasion:giant_tree",
+  "config": {
+    "log": { "Name": "minecraft:oak_log", "Properties": { "axis": "y" } },
+    "leaves": { "Name": "minecraft:oak_leaves", "Properties": { "distance": "7", "persistent": "true", "waterlogged": "false" } },
+    "accent_leaves": { "Name": "minecraft:oak_leaves", "Properties": { "distance": "7", "persistent": "true", "waterlogged": "false" } }
+  }
+}

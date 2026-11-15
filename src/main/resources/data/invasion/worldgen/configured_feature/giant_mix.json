@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "features": [
+      { "chance": 0.33, "feature": { "feature": "invasion:giant_oak", "placement": [] } },
+      { "chance": 0.5, "feature": { "feature": "invasion:giant_birch", "placement": [] } }
+    ],
+    "default": { "feature": "invasion:giant_azalea", "placement": [] }
+  }
+}

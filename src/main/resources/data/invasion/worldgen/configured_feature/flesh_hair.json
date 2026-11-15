@@ -1,0 +1,2 @@
+{ "type": "minecraft:simple_block", "config": { "to_place": { "type": "minecraft:weighted_state_provider", "entries": [
+  { "data": { "Name": "invasion:flesh_hair" }, "weight": 3 }, { "data": { "Name": "invasion:long_flesh_hair" }, "weight": 1 } ] } } }
