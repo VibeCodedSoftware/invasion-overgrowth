@@ -247,16 +247,39 @@ public class TempleGuardian extends Zombie {
             spawnAtLocation(new ItemStack(net.minecraft.world.item.Items.GOLDEN_APPLE, 1 + random.nextInt(2)));
             spawnAtLocation(new ItemStack(net.minecraft.world.item.Items.EXPERIENCE_BOTTLE, 4 + random.nextInt(5)));
             if (random.nextInt(4) == 0) spawnAtLocation(new ItemStack(net.minecraft.world.item.Items.NETHERITE_SCRAP));
+            // a lost gauntlet can always be won back: the rematch hands one over if nobody nearby still has one
+            boolean someoneHasOne = false;
+            for (net.minecraft.world.entity.player.Player p : level.getEntitiesOfClass(net.minecraft.world.entity.player.Player.class, getBoundingBox().inflate(64))) {
+                if (p.getInventory().hasAnyMatching(s -> s.is(ModRegistry.PARTICLE_GLOVE.get()))) someoneHasOne = true;
+            }
+            if (!someoneHasOne) giveGauntlet(level, source);
             if (com.invasion.world.InvasionData.get(level.getServer()).isActive()) InvasionManager.onBossDefeated(level.getServer());
             return;
         }
         if (wasAlive && level() instanceof ServerLevel level) {
-            ItemEntity drop = spawnAtLocation(new ItemStack(ModRegistry.PARTICLE_GLOVE.get()));
-            if (drop != null) {
-                drop.setUnlimitedLifetime();
-                drop.setGlowingTag(true);
-            }
+            giveGauntlet(level, source);
             InvasionManager.onBossDefeated(level.getServer());
+        }
+    }
+
+    /**
+     * Puts the Particle Gauntlet straight into the killer's (or the nearest player's) inventory so it can't be lost
+     * in lava, the void or an explosion. Only if there is no room does it drop, as an indestructible, glowing item.
+     */
+    private void giveGauntlet(ServerLevel level, DamageSource source) {
+        ItemStack glove = new ItemStack(ModRegistry.PARTICLE_GLOVE.get());
+        net.minecraft.world.entity.player.Player player = source.getEntity() instanceof net.minecraft.world.entity.player.Player p ? p
+                : level.getNearestPlayer(this, 64);
+        if (player != null && player.getInventory().add(glove)) {
+            player.displayClientMessage(Component.literal("The Particle Gauntlet is yours.").withStyle(net.minecraft.ChatFormatting.GOLD), true);
+            level.playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.ITEM_PICKUP, net.minecraft.sounds.SoundSource.PLAYERS, 1.0F, 0.7F);
+            return;
+        }
+        ItemEntity drop = player != null ? player.drop(glove, false) : spawnAtLocation(glove);
+        if (drop != null) {
+            drop.setUnlimitedLifetime();
+            drop.setGlowingTag(true);
+            drop.setInvulnerable(true);
         }
     }
 

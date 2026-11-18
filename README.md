@@ -46,9 +46,13 @@ Surface water in the red biomes is real **blood**: fill a bucket.
 ## Gauntlet Spawner
 A mossy pedestal with a glowing top, found in every Overgrown Dungeon (mine it with a pickaxe).
 - **Display:** use any item on it and the item floats and turns above the glow. Use it empty-handed to take the item back.
-- **Rematch:** place the **Particle Gauntlet** on a Gauntlet Spawner inside the Overgrowth temple and the **Temple Guardian rises again**.
-  You keep the gauntlet (take it back off the pedestal to fight). A rematch Guardian drops diamonds, emeralds, golden apples and
-  experience instead of a second gauntlet.
+- **Rematch:** place a **diamond or anything better** (diamond/netherite gear, nether star, totem, elytra, the Particle Gauntlet...)
+  on a Gauntlet Spawner inside the Overgrowth temple and the **Temple Guardian rises again**. Your offering stays on the pedestal; take it back.
+  A rematch Guardian drops diamonds, emeralds, golden apples and experience, plus a new gauntlet if nobody nearby still has one.
+  The list of offerings is the item tag `invasion:guardian_offerings`.
+
+The gauntlet is never lost: when the Guardian falls it goes straight into the killer's inventory (if that's full, it drops as an
+indestructible, glowing item).
 
 ## Overgrown Dungeons
 Underground in every Overgrowth biome: a big mossy monster hall with invader spawners and a blood-geyser altar, cobwebbed corridors and side rooms with

@@ -126,7 +126,7 @@ final class SelfTest {
         og.setBlock(ped, ModRegistry.GAUNTLET_SPAWNER.get().defaultBlockState(), 3);
         FakePlayer fp = FakePlayerFactory.getMinecraft(og);
         fp.moveTo(ped.getX() + 0.5, ped.getY() + 1, ped.getZ() - 1.5, 0, 30);
-        ItemStack glove = new ItemStack(ModRegistry.PARTICLE_GLOVE.get());
+        ItemStack glove = new ItemStack(Items.DIAMOND);
         fp.setItemInHand(InteractionHand.MAIN_HAND, glove);
         var hit = new net.minecraft.world.phys.BlockHitResult(Vec3.atCenterOf(ped).add(0, 0.5, 0), net.minecraft.core.Direction.UP, ped, false);
         var res = og.getBlockState(ped).useItemOn(glove, og, fp, InteractionHand.MAIN_HAND, hit);
@@ -138,7 +138,21 @@ final class SelfTest {
         og.getBlockState(ped).useWithoutItem(og, fp, hit);
         ItemStack glove2 = new ItemStack(ModRegistry.PARTICLE_GLOVE.get());
         og.getBlockState(ped).useItemOn(glove2, og, fp, InteractionHand.MAIN_HAND, hit);
-        InvasionMod.LOGGER.info("SELFTEST gauntlet spawner second use: guardians={}",
+        var awake = og.getEntitiesOfClass(com.invasion.entity.TempleGuardian.class, new net.minecraft.world.phys.AABB(temple).inflate(20));
+        InvasionMod.LOGGER.info("SELFTEST gauntlet spawner second use: guardians={}", awake.size());
+        // a stone item must not wake anything
+        if (!awake.isEmpty()) awake.get(0).die(og.damageSources().generic());
+        awake.forEach(net.minecraft.world.entity.Entity::discard);
+        var gloves = og.getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class, new net.minecraft.world.phys.AABB(temple).inflate(20),
+                ie -> ie.getItem().is(ModRegistry.PARTICLE_GLOVE.get()));
+        InvasionMod.LOGGER.info("SELFTEST rematch kill with no gauntlet around -> gauntlet drops: {} (invulnerable={})", gloves.size(),
+                !gloves.isEmpty() && gloves.get(0).isInvulnerable());
+        fp.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+        og.getBlockState(ped).useWithoutItem(og, fp, hit);
+        ItemStack stone = new ItemStack(Items.COBBLESTONE);
+        og.getBlockState(ped).useItemOn(stone, og, fp, InteractionHand.MAIN_HAND, hit);
+        InvasionMod.LOGGER.info("SELFTEST cobblestone offering: displayed={} guardians={}",
+                ((com.invasion.block.GauntletSpawnerBlockEntity) og.getBlockEntity(ped)).item(),
                 og.getEntitiesOfClass(com.invasion.entity.TempleGuardian.class, new net.minecraft.world.phys.AABB(temple).inflate(20)).size());
     }
 

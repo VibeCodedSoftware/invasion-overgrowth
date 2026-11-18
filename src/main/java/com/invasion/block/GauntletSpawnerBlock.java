@@ -42,6 +42,9 @@ public class GauntletSpawnerBlock extends Block implements EntityBlock {
             Block.box(1, 0, 1, 15, 3, 15),
             Block.box(3, 3, 3, 13, 13, 13),
             Block.box(2, 13, 2, 14, 16, 14));
+    /** Items that wake the guardian when placed on the pedestal in the temple: diamond tier and up, and the gauntlet. */
+    public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> OFFERINGS =
+            net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, InvasionMod.id("guardian_offerings"));
     /** How close to the temple centre the pedestal must stand to wake the guardian. */
     private static final int TEMPLE_RANGE = 40;
 
@@ -69,7 +72,7 @@ public class GauntletSpawnerBlock extends Block implements EntityBlock {
             ItemStack placed = player.getAbilities().instabuild ? stack.copyWithCount(1) : stack.split(1);
             be.setItem(placed);
             level.playSound(null, pos, SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.BLOCKS, 1.0F, 1.2F);
-            if (placed.is(ModRegistry.PARTICLE_GLOVE.get()) && level instanceof ServerLevel server) tryWakeGuardian(server, pos, player);
+            if (placed.is(OFFERINGS) && level instanceof ServerLevel server) tryWakeGuardian(server, pos, player);
         }
         return ItemInteractionResult.sidedSuccess(level.isClientSide);
     }
