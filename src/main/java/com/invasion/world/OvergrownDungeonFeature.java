@@ -84,6 +84,8 @@ public class OvergrownDungeonFeature extends Feature<NoneFeatureConfiguration> {
             BlockPos chest = rc.relative(d, 2);
             set(level, chest, Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING, d.getOpposite()));
             RandomizableContainer.setBlockEntityLootTable(level, r, chest, LOOT);
+            // every dungeon keeps one Gauntlet Spawner, beside the chest in the room opposite the blood pool
+            if (roomIndex == (bloodRoom + 2) % 4) set(level, chest.relative(d.getClockWise(), 2), ModRegistry.GAUNTLET_SPAWNER.get().defaultBlockState());
             if (roomIndex == bloodRoom) {
                 for (int dx = -1; dx <= 1; dx++) for (int dz = -1; dz <= 1; dz++) set(level, rc.offset(dx, -1, dz), ModFluids.BLOOD_BLOCK.get().defaultBlockState());
             } else if (r.nextBoolean()) {

@@ -17,6 +17,8 @@ public class InvasionData extends SavedData {
     @Nullable private BlockPos templeCenter;
     @Nullable private BlockPos templeArrival;
     private boolean bossSpawned;
+    /** The day this world's meteor strikes (0 = not chosen yet). */
+    private int meteorDay;
 
     public static InvasionData get(MinecraftServer server) {
         return server.overworld().getDataStorage().computeIfAbsent(
@@ -34,6 +36,7 @@ public class InvasionData extends SavedData {
         d.templeCenter = NbtUtils.readBlockPos(tag, "Temple").orElse(null);
         d.templeArrival = NbtUtils.readBlockPos(tag, "Arrival").orElse(null);
         d.bossSpawned = tag.getBoolean("BossSpawned");
+        d.meteorDay = tag.getInt("MeteorDay");
         return d;
     }
 
@@ -44,6 +47,7 @@ public class InvasionData extends SavedData {
         if (templeCenter != null) tag.put("Temple", NbtUtils.writeBlockPos(templeCenter));
         if (templeArrival != null) tag.put("Arrival", NbtUtils.writeBlockPos(templeArrival));
         tag.putBoolean("BossSpawned", bossSpawned);
+        tag.putInt("MeteorDay", meteorDay);
         return tag;
     }
 
@@ -53,6 +57,8 @@ public class InvasionData extends SavedData {
     @Nullable public BlockPos templeCenter() { return templeCenter; }
     @Nullable public BlockPos templeArrival() { return templeArrival; }
     public boolean bossSpawned() { return bossSpawned; }
+    public int meteorDay() { return meteorDay; }
+    public void setMeteorDay(int day) { meteorDay = day; setDirty(); }
 
     public void setState(State s) { state = s; setDirty(); }
     public void setPortalPos(BlockPos p) { portalPos = p; setDirty(); }

@@ -7,7 +7,7 @@ A blood-red meteor, an endless horde that hunts you down, and an overgrown world
 **Requires:** Minecraft 1.21.1 + NeoForge 21.1.x. Drop the jar into your `mods` folder (server and clients for multiplayer).
 
 ## The invasion
-1. After **3 Minecraft days** a giant tumbling block of bloody cobblestone streaks overhead with a fire trail, crashes 45–75 blocks from a player and leaves a **bloody cobblestone portal**.
+1. On a **random day between day 20 and day 60** (picked once per world) a giant tumbling block of bloody cobblestone streaks overhead with a fire trail, crashes 45–75 blocks from a player and leaves a **bloody cobblestone portal**.
 2. **Moss spreads** out from the portal frame. The frame and portal **can't be broken in survival** (immune to explosions, pistons, water, the Wither and the Ender Dragon).
 3. An **endless horde** pours out: sword **Invaders** and pickaxe **Invader Miners**. They never burn, never despawn, and **lock on to the nearest survival player anywhere in the Overworld**: they march toward you across the map, tunnel, staircase and pillar through anything softer than obsidian, and block their way up out of water. Respects `mobGriefing`.
 4. Run as far as you like: while the invasion is active, small groups **claw their way out of the ground near players who are far from the portal**.
@@ -43,6 +43,13 @@ Surface water in the red biomes is real **blood**: fill a bucket.
 - Stepping on a **Blood Geyser** launches you ~16 blocks up and burns you. Sneak to stand on it; mine it with a pickaxe to take it home.
 - **Blood Resistance** (boots, treasure only): no burn, slow falling after a launch (geyser **elevators**!), and immunity to blood. Found in Ent village and dungeon chests.
 
+## Gauntlet Spawner
+A mossy pedestal with a glowing top, found in every Overgrown Dungeon (mine it with a pickaxe).
+- **Display:** use any item on it and the item floats and turns above the glow. Use it empty-handed to take the item back.
+- **Rematch:** place the **Particle Gauntlet** on a Gauntlet Spawner inside the Overgrowth temple and the **Temple Guardian rises again**.
+  You keep the gauntlet (take it back off the pedestal to fight). A rematch Guardian drops diamonds, emeralds, golden apples and
+  experience instead of a second gauntlet.
+
 ## Overgrown Dungeons
 Underground in every Overgrowth biome: a big mossy monster hall with invader spawners and a blood-geyser altar, cobwebbed corridors and side rooms with
 loot chests (diamonds, emeralds, enchanted gear and books, golden apples, netherite scrap, giant saplings, Blood Resistance).
@@ -55,7 +62,7 @@ pressure plate, leaves, leaf litter, sapling, boat and chest boat.
 `/invasion invasion start [player]` · `/invasion invasion stop` · `/invasion invasion status` · `/invasion temple` (`/hw ...` works too).
 
 ## Config
-`config/invasion-common.toml`: invasion delay (days), auto-invasion, max horde size, spawn interval, pursuit groups on/off and interval,
+`config/invasion-common.toml`: earliest and latest meteor day, auto-invasion, max horde size, spawn interval, pursuit groups on/off and interval,
 whether invaders dig, moss radius.
 
 ## Building

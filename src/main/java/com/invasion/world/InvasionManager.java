@@ -34,7 +34,12 @@ public final class InvasionManager {
         ServerLevel overworld = server.overworld();
         InvasionData data = InvasionData.get(server);
         if (data.state() != InvasionData.State.WAITING || overworld.players().isEmpty()) return;
-        if (overworld.getDayTime() >= InvasionConfig.INVASION_DAYS.get() * 24000L) {
+        if (data.meteorDay() <= 0) {
+            int lo = Math.min(InvasionConfig.MIN_DAY.get(), InvasionConfig.MAX_DAY.get());
+            int hi = Math.max(InvasionConfig.MIN_DAY.get(), InvasionConfig.MAX_DAY.get());
+            data.setMeteorDay(Math.max(1, lo + overworld.random.nextInt(hi - lo + 1)));
+        }
+        if (overworld.getDayTime() >= data.meteorDay() * 24000L) {
             start(server, null);
         }
     }
@@ -171,7 +176,8 @@ public final class InvasionManager {
         InvasionData data = InvasionData.get(server);
         long day = server.overworld().getDayTime() / 24000L;
         String text = switch (data.state()) {
-            case WAITING -> "No invasion yet. Day " + day + " of " + InvasionConfig.INVASION_DAYS.get()
+            case WAITING -> "No invasion yet. Day " + day + ". The meteor will strike some time between day "
+                    + InvasionConfig.MIN_DAY.get() + " and " + InvasionConfig.MAX_DAY.get()
                     + (InvasionConfig.AUTO_INVASION.get() ? "" : " (automatic invasion disabled)");
             case METEOR_FALLING -> "A meteor is falling!";
             case ACTIVE -> "Invasion ACTIVE. Portal at " + data.portalPos().toShortString();

@@ -94,6 +94,10 @@ public final class ModRegistry {
             () -> new com.invasion.block.BloodGeyserBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED)
                     .strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE).lightLevel(s -> 5)));
 
+    public static final DeferredBlock<com.invasion.block.GauntletSpawnerBlock> GAUNTLET_SPAWNER = BLOCKS.register("gauntlet_spawner",
+            () -> new com.invasion.block.GauntletSpawnerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN)
+                    .strength(3.5F, 9.0F).requiresCorrectToolForDrops().sound(SoundType.STONE).noOcclusion().lightLevel(s -> 12)));
+
     public static final DeferredBlock<net.minecraft.world.level.block.SaplingBlock> GIANT_OAK_SAPLING = giantSapling("giant_oak_sapling", "giant_oak");
     public static final DeferredBlock<net.minecraft.world.level.block.SaplingBlock> GIANT_BIRCH_SAPLING = giantSapling("giant_birch_sapling", "giant_birch");
     public static final DeferredBlock<net.minecraft.world.level.block.SaplingBlock> GIANT_AZALEA_SAPLING = giantSapling("giant_azalea_sapling", "giant_azalea");
@@ -126,11 +130,17 @@ public final class ModRegistry {
     @SuppressWarnings("DataFlowIssue")
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PortalCoreBlockEntity>> PORTAL_CORE = BLOCK_ENTITIES.register("portal_core",
             () -> BlockEntityType.Builder.of(PortalCoreBlockEntity::new, PORTAL.get()).build(null));
+    @SuppressWarnings("DataFlowIssue")
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<com.invasion.block.GauntletSpawnerBlockEntity>> GAUNTLET_SPAWNER_BE =
+            BLOCK_ENTITIES.register("gauntlet_spawner",
+                    () -> BlockEntityType.Builder.of(com.invasion.block.GauntletSpawnerBlockEntity::new, GAUNTLET_SPAWNER.get()).build(null));
 
     // ---- Items ----
     public static final DeferredItem<BlockItem> BLOODY_COBBLESTONE_ITEM = ITEMS.registerSimpleBlockItem(BLOODY_COBBLESTONE);
     public static final DeferredItem<BlockItem> PORTAL_FRAME_ITEM = ITEMS.registerSimpleBlockItem(PORTAL_FRAME);
     public static final DeferredItem<BlockItem> BLOOD_GEYSER_ITEM = ITEMS.registerSimpleBlockItem(BLOOD_GEYSER);
+    public static final DeferredItem<BlockItem> GAUNTLET_SPAWNER_ITEM = ITEMS.register("gauntlet_spawner",
+            () -> new BlockItem(GAUNTLET_SPAWNER.get(), new Item.Properties().rarity(Rarity.RARE)));
     public static final DeferredItem<BlockItem> GIANT_OAK_SAPLING_ITEM = ITEMS.register("giant_oak_sapling", () -> new com.invasion.item.GiantSaplingItem(GIANT_OAK_SAPLING.get()));
     public static final DeferredItem<BlockItem> GIANT_BIRCH_SAPLING_ITEM = ITEMS.register("giant_birch_sapling", () -> new com.invasion.item.GiantSaplingItem(GIANT_BIRCH_SAPLING.get()));
     public static final DeferredItem<BlockItem> GIANT_AZALEA_SAPLING_ITEM = ITEMS.register("giant_azalea_sapling", () -> new com.invasion.item.GiantSaplingItem(GIANT_AZALEA_SAPLING.get()));
@@ -160,6 +170,7 @@ public final class ModRegistry {
                         out.accept(BLOODY_COBBLESTONE_ITEM.get());
                         out.accept(PORTAL_FRAME_ITEM.get());
                         out.accept(BLOOD_GEYSER_ITEM.get());
+                        out.accept(GAUNTLET_SPAWNER_ITEM.get());
                         out.accept(GIANT_OAK_SAPLING_ITEM.get());
                         out.accept(GIANT_BIRCH_SAPLING_ITEM.get());
                         out.accept(GIANT_AZALEA_SAPLING_ITEM.get());

@@ -94,7 +94,7 @@ final class SelfTest {
         StringBuilder cs = new StringBuilder();
         for (var en : cover.entrySet()) cs.append(String.format("%s=%.1f%% ", en.getKey(), en.getValue() * 100.0 / samples));
         InvasionMod.LOGGER.info("SELFTEST coverage (12800x12800 blocks): {}", cs);
-        int dungeonSpawners = 0, chunks = 0;
+        int dungeonSpawners = 0, chunks = 0, gauntletSpawners = 0;
         for (String b : BIOMES) {
             ResourceKey<Biome> key = ResourceKey.create(Registries.BIOME, InvasionMod.id(b));
             var found = og.findClosestBiome3d(h -> h.is(key), new BlockPos(0, 80, 0), 6400, 32, 64);
@@ -105,6 +105,8 @@ final class SelfTest {
             for (int dx = -4; dx <= 4; dx++) for (int dz = -4; dz <= 4; dz++) {
                 var ch = og.getChunk(cx + dx, cz + dz, ChunkStatus.FULL, true);
                 chunks++;
+                for (BlockPos bp : ch.getBlockEntitiesPos())
+                    if (ch.getBlockState(bp).is(ModRegistry.GAUNTLET_SPAWNER.get())) gauntletSpawners++;
                 if (ch instanceof net.minecraft.world.level.chunk.LevelChunk lc)
                     for (var be : lc.getBlockEntities().values())
                         if (be instanceof net.minecraft.world.level.block.entity.SpawnerBlockEntity
@@ -115,7 +117,29 @@ final class SelfTest {
                     (int) Math.sqrt(at.distSqr(BlockPos.ZERO)), System.currentTimeMillis() - t0, top,
                     og.getBlockState(new BlockPos(at.getX(), top - 1, at.getZ())));
         }
-        InvasionMod.LOGGER.info("SELFTEST dungeons: {} invader spawners in {} chunks", dungeonSpawners, chunks);
+        InvasionMod.LOGGER.info("SELFTEST dungeons: {} invader spawners, {} gauntlet spawners in {} chunks", dungeonSpawners, gauntletSpawners, chunks);
+
+        // Gauntlet Spawner rematch: put the gauntlet on a spawner at the temple and expect a rematch Guardian.
+        BlockPos temple = new BlockPos(0, og.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, 0, 0), 0);
+        com.invasion.world.InvasionData.get(e.getServer()).setTemple(temple, temple);
+        BlockPos ped = temple.offset(6, 0, 0);
+        og.setBlock(ped, ModRegistry.GAUNTLET_SPAWNER.get().defaultBlockState(), 3);
+        FakePlayer fp = FakePlayerFactory.getMinecraft(og);
+        fp.moveTo(ped.getX() + 0.5, ped.getY() + 1, ped.getZ() - 1.5, 0, 30);
+        ItemStack glove = new ItemStack(ModRegistry.PARTICLE_GLOVE.get());
+        fp.setItemInHand(InteractionHand.MAIN_HAND, glove);
+        var hit = new net.minecraft.world.phys.BlockHitResult(Vec3.atCenterOf(ped).add(0, 0.5, 0), net.minecraft.core.Direction.UP, ped, false);
+        var res = og.getBlockState(ped).useItemOn(glove, og, fp, InteractionHand.MAIN_HAND, hit);
+        var bosses = og.getEntitiesOfClass(com.invasion.entity.TempleGuardian.class, new net.minecraft.world.phys.AABB(temple).inflate(20));
+        var shown = ((com.invasion.block.GauntletSpawnerBlockEntity) og.getBlockEntity(ped)).item();
+        InvasionMod.LOGGER.info("SELFTEST gauntlet spawner: use={} displayed={} handAfter={} guardians={}", res, shown, fp.getMainHandItem(), bosses.size());
+        // second use while the guardian is awake must not summon another
+        fp.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+        og.getBlockState(ped).useWithoutItem(og, fp, hit);
+        ItemStack glove2 = new ItemStack(ModRegistry.PARTICLE_GLOVE.get());
+        og.getBlockState(ped).useItemOn(glove2, og, fp, InteractionHand.MAIN_HAND, hit);
+        InvasionMod.LOGGER.info("SELFTEST gauntlet spawner second use: guardians={}",
+                og.getEntitiesOfClass(com.invasion.entity.TempleGuardian.class, new net.minecraft.world.phys.AABB(temple).inflate(20)).size());
     }
 
     private static final java.util.List<com.invasion.entity.InvaderZombie> HUNTERS = new java.util.ArrayList<>();

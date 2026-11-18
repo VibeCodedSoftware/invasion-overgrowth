@@ -8,9 +8,12 @@ public final class InvasionConfig {
     public static final ModConfigSpec.BooleanValue AUTO_INVASION = B
             .comment("Start the invasion automatically after the delay below.")
             .define("automaticInvasion", true);
-    public static final ModConfigSpec.IntValue INVASION_DAYS = B
-            .comment("Minecraft days before the meteor strikes.")
-            .defineInRange("invasionDelayDays", 3, 0, 10000);
+    public static final ModConfigSpec.IntValue MIN_DAY = B
+            .comment("Earliest day the meteor can strike. Each world picks a random day between this and the latest day.")
+            .defineInRange("meteorEarliestDay", 20, 0, 10000);
+    public static final ModConfigSpec.IntValue MAX_DAY = B
+            .comment("Latest day the meteor can strike.")
+            .defineInRange("meteorLatestDay", 60, 0, 10000);
     public static final ModConfigSpec.IntValue MAX_HORDE = B
             .comment("Maximum invaders alive around the portal at once.")
             .defineInRange("maxHordeSize", 12, 1, 200);

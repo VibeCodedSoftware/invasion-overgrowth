@@ -111,6 +111,7 @@ public class InvasionClient {
 
     private static void registerRenderers(EntityRenderersEvent.RegisterRenderers e) {
         e.registerBlockEntityRenderer(ModRegistry.PORTAL_CORE.get(), PortalRenderer::new);
+        e.registerBlockEntityRenderer(ModRegistry.GAUNTLET_SPAWNER_BE.get(), GauntletSpawnerRenderer::new);
         e.registerEntityRenderer(ModRegistry.INVADER.get(), ctx -> new TexturedZombieRenderer(ctx, InvasionMod.id("textures/entity/invader.png")));
         e.registerEntityRenderer(ModRegistry.INVADER_MINER.get(), ctx -> new TexturedZombieRenderer(ctx, InvasionMod.id("textures/entity/invader_miner.png")));
         e.registerEntityRenderer(ModRegistry.GUARDIAN.get(), GuardianRenderer::new);

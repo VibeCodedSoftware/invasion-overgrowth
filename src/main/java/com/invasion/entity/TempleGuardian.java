@@ -54,6 +54,8 @@ public class TempleGuardian extends Zombie {
     private int cycleIndex;
     private boolean summonedHelp;
     private boolean wasAirborne;
+    /** Woken again with a Gauntlet Spawner: drops treasure instead of a second gauntlet. */
+    private boolean rematch;
     private final Predicate<LivingEntity> canHit = e -> !(e instanceof InvaderZombie) && !(e instanceof TempleGuardian);
 
     public TempleGuardian(EntityType<? extends Zombie> type, Level level) {
@@ -239,6 +241,15 @@ public class TempleGuardian extends Zombie {
     public void die(DamageSource source) {
         boolean wasAlive = !dead && !isRemoved();
         super.die(source);
+        if (wasAlive && rematch && level() instanceof ServerLevel level) {
+            spawnAtLocation(new ItemStack(net.minecraft.world.item.Items.DIAMOND, 3 + random.nextInt(4)));
+            spawnAtLocation(new ItemStack(net.minecraft.world.item.Items.EMERALD, 4 + random.nextInt(6)));
+            spawnAtLocation(new ItemStack(net.minecraft.world.item.Items.GOLDEN_APPLE, 1 + random.nextInt(2)));
+            spawnAtLocation(new ItemStack(net.minecraft.world.item.Items.EXPERIENCE_BOTTLE, 4 + random.nextInt(5)));
+            if (random.nextInt(4) == 0) spawnAtLocation(new ItemStack(net.minecraft.world.item.Items.NETHERITE_SCRAP));
+            if (com.invasion.world.InvasionData.get(level.getServer()).isActive()) InvasionManager.onBossDefeated(level.getServer());
+            return;
+        }
         if (wasAlive && level() instanceof ServerLevel level) {
             ItemEntity drop = spawnAtLocation(new ItemStack(ModRegistry.PARTICLE_GLOVE.get()));
             if (drop != null) {
@@ -247,6 +258,22 @@ public class TempleGuardian extends Zombie {
             }
             InvasionManager.onBossDefeated(level.getServer());
         }
+    }
+
+    public void setRematch(boolean rematch) {
+        this.rematch = rematch;
+    }
+
+    @Override
+    public void addAdditionalSaveData(net.minecraft.nbt.CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putBoolean("Rematch", rematch);
+    }
+
+    @Override
+    public void readAdditionalSaveData(net.minecraft.nbt.CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        rematch = tag.getBoolean("Rematch");
     }
 
     @Override
